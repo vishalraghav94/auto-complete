@@ -24,5 +24,5 @@
     }
 </style>
 <ul ng-show="pattern.length">
-    <li ng-repeat="suggestion in suggestions" ng-click="fillInput($event)" ng-class="{'selected': $index === initialIndex}">{{suggestion}}</li>
+    <li ng-repeat="suggestion in suggestions" ng-click="fillInput($event)" ng-class="{'selected': $index === selectedIndex}">{{suggestion}}</li>
 </ul>
