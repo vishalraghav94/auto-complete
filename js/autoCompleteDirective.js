@@ -1,7 +1,7 @@
 /**
  * Created by apple on 07/07/17.
  */
-myApp.directive('autoComp',['$interval', function ($interval) {
+myApp.directive('autoComp',[function () {
     return {
         restrict: 'EA',
         templateUrl: 'option-list.html',
