@@ -17,22 +17,21 @@ myApp.directive('autoComp',[ function () {
                     var element = event.target;
                     scope.pattern = element.innerText;
                };
-               scope.initialIndex = 0;
+               scope.selectedIndex = 0;
                scope.autoComplete = function (event) {
                    if (event.key === 'Enter') {
                        if(scope.suggestions) {
-                           scope.pattern = scope.suggestions[scope.initialIndex];
-
+                           scope.pattern = scope.suggestions[scope.selectedIndex];
                        }
                    }
                    else if (event.key === 'ArrowDown') {
-                       if (scope.initialIndex < scope.suggestions.length - 1) {
-                           scope.initialIndex++;
+                       if (scope.selectedIndex < scope.suggestions.length - 1) {
+                           scope.selectedIndex++;
                        }
                    }
                    else if (event.key === 'ArrowUp') {
-                       if (scope.initialIndex > 0) {
-                           scope.initialIndex--;
+                       if (scope.selectedIndex > 0) {
+                           scope.selectedIndex--;
                        }
                    }
                }
