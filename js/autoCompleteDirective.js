@@ -4,28 +4,39 @@
 myApp.directive('autoComp',['$interval', function ($interval) {
     return {
         restrict: 'EA',
-        transclude: true,
-        scope: {
-            pattern: "@"
-        },
         templateUrl: 'option-list.html',
-        link: function (scope, element, attr, myCtrl) {
+        link: function (scope, element, event) {
                 scope.listVisible = false;
-                scope.dictionary = ['hello', 'hell', 'gaurav', 'ayushi', 'search'];
-                console.log(element);
-                function filtering () {
-                    console.log(scope.pattern);
-                    scope.suggestions = scope.dictionary.filter(function (ele) {
-                    return !ele.indexOf(scope.pattern+"");
-                    });
-                }
+                scope.dictionary = ["The", "String", "object", "lets", "you", "work", "with", "a", "series", "of", "characters.", "It", "wraps", "the", "string", "primitive", "data", "type", "with", "a", "number", "of", "helper", "methods"];//['hello', 'hell', 'gaurav', 'ayushi', 'search','now', 'new'];
+               scope.makeSuggestions = function () {
+                   scope.suggestions = scope.dictionary.filter(function (ele, index) {
+                       return !ele.indexOf(scope.pattern + "") && (index === scope.dictionary.indexOf(ele));
+                   });
+               };
+               scope.fillInput = function (event) {
+                    var element = event.target;
+                    scope.pattern = element.innerText;
+               };
+               scope.initialIndex = 0;
+               scope.autoComplete = function (event) {
+                   if (event.key === 'Enter') {
+                       if(scope.suggestions) {
+                           scope.pattern = scope.suggestions[scope.initialIndex];
 
-                element[0].previousElementSibling.addEventListener("keyup", function () {
-                    console.log(scope.pattern);
-                    scope.suggestions = scope.dictionary.filter(function (ele) {
-                        return !ele.indexOf(scope.pattern+"");
-                    });
-                });
+                       }
+                   }
+                   else if (event.key === 'ArrowDown') {
+                       if (scope.initialIndex < scope.suggestions.length - 1) {
+                           scope.initialIndex++;
+                       }
+                   }
+                   else if (event.key === 'ArrowUp') {
+                       if (scope.initialIndex > 0) {
+                           scope.initialIndex--;
+                       }
+                   }
+               }
+
         }
     }
 }]);

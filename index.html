@@ -9,7 +9,7 @@
 
 </head>
 <body ng-app="autoComplete" ng-controller="myController">
-<input type="text" ng-model="pattern" >
-<auto-comp pattern="{{pattern}}"></auto-comp>
+<input type="text" ng-model="pattern" ng-change="makeSuggestions()" ng-keydown="autoComplete($event)">
+<auto-comp pattern="pattern"></auto-comp>
 </body>
 </html>
