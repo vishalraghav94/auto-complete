@@ -9,7 +9,8 @@
     <style>
         .input-box {
             padding: 10px;
-            font-size: 20px;
+            font-size: 16px;
+            width: 50%;
             outline: none;
             border: none;
             box-shadow: 1px 1px 6px 3px rgba(0,0,0,0.2);
@@ -21,7 +22,7 @@
     </style>
 </head>
 <body ng-app="autoComplete" ng-controller="myController">
-<input class="input-box" type="text" ng-model="pattern" ng-change="makeSuggestions()" ng-keydown="autoComplete($event)">
+<input class="input-box" type="text" ng-model="patternList" ng-change="makeSuggestions()" ng-keydown="autoComplete($event)">
 <auto-comp pattern="pattern"></auto-comp>
 </body>
 </html>

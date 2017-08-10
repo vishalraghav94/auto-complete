@@ -6,6 +6,7 @@ myApp.directive('autoComp',[ function () {
         restrict: 'EA',
         templateUrl: 'option-list.html',
         link: function (scope, element, event) {
+            scope.patternList = '';
                 scope.listVisible = false;
                 scope.dictionary = ["The", "String", "object", "lets",
                     "you", "work", "with", "a", "series", "of", "characters.",
@@ -22,16 +23,23 @@ myApp.directive('autoComp',[ function () {
                     "value", "than", "any", "node", "in", "the", "queue", "(or", "until", "the", "queue", "is",
                     "empty).[a]", "The", "f", "value", "of", "the", "goal", "is", "then"];//['hello', 'hell', 'gaurav', 'ayushi', 'search','now', 'new'];
                scope.makeSuggestions = function () {
+                   scope.pattern = scope.patternList.split(' ');
+                   scope.pattern = scope.pattern[scope.pattern.length - 1];
                    scope.suggestions = scope.dictionary.filter(function (ele, index) {
                        return !ele.indexOf(scope.pattern + "") && (index === scope.dictionary.indexOf(ele));
                    });
                };
                scope.fillInput = function (event) {
                     var element = event.target;
-                    scope.pattern = element.innerText;
+                    scope.pattern = '';
+                    var temp = element.innerText;
+                    scope.patternList = scope.patternList.split(' ');
+                    scope.patternList[scope.patternList.length - 1] = temp;
+                    scope.patternList = scope.patternList.join(' ');
                };
                scope.selectedIndex = 0;
                scope.autoComplete = function (event) {
+
                    if (event.key === "Backspace") {
                        scope.selectedIndex = 0;
                    }
@@ -58,7 +66,10 @@ myApp.directive('autoComp',[ function () {
                        }
                        if (event.key === 'Enter') {
                            if (scope.suggestions) {
-                               scope.pattern = scope.suggestions[scope.selectedIndex];
+                               var temp = scope.suggestions[scope.selectedIndex];
+                               scope.patternList = scope.patternList.split(' ');
+                               scope.patternList[scope.patternList.length - 1] = temp;
+                               scope.patternList = scope.patternList.join(' ');
                                scope.suggestions = undefined;
                                scope.selectedIndex = 0;
                            }
