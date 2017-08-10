@@ -35,7 +35,7 @@ myApp.directive('autoComp',[ function () {
                     var temp = element.innerText;
                     scope.patternList = scope.patternList.split(' ');
                     scope.patternList[scope.patternList.length - 1] = temp;
-                    scope.patternList = scope.patternList.join(' ');
+                    scope.patternList = scope.patternList.join(' ') + ' ';
                };
                scope.selectedIndex = 0;
                scope.autoComplete = function (event) {
@@ -69,7 +69,7 @@ myApp.directive('autoComp',[ function () {
                                var temp = scope.suggestions[scope.selectedIndex];
                                scope.patternList = scope.patternList.split(' ');
                                scope.patternList[scope.patternList.length - 1] = temp;
-                               scope.patternList = scope.patternList.join(' ');
+                               scope.patternList = scope.patternList.join(' ') + ' ';
                                scope.suggestions = undefined;
                                scope.selectedIndex = 0;
                            }
